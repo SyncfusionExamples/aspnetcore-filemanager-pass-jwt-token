@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@using Syncfusion.EJ2
+
+    <div class=" control-section">
+        <div class="sample-container">
+                <!-- File Manager full functionalities sample -->
+                <ejs-filemanager id="filemanager" view="@Syncfusion.EJ2.FileManager.ViewType.Details" beforeSend="beforeSend" beforeImageLoad="beforeImageLoad" beforeDownload="beforeDownload">
+                    <e-filemanager-ajaxsettings url="/Home/AmazonS3FileOperations"
+                                            downloadUrl="/Home/AmazonS3Download"
+                                            uploadUrl="/Home/AmazonS3Upload"
+                                            getImageUrl="/Home/AmazonS3GetImage">
+                    </e-filemanager-ajaxsettings>
+                </ejs-filemanager>
+        </div>
+    </div>
+<script>
+    
+function beforeSend(args) {
+    //Ajax beforeSend event 
+    args.ajaxSettings.beforeSend = function (args) {
+        //Setting authorization header              
+            args.httpRequest.setRequestHeader("Authorization", "Pictures"); 
+    }
+}
+function beforeImageLoad(args) {
+    var rootFileName = "Pictures";
+    args.imageUrl = args.imageUrl + '&rootName=' + rootFileName;
+}
+function beforeDownload(args) {
+    var rootFileName = "Pictures" ;
+    var includeCustomAttribute = args.data;
+    includeCustomAttribute.rootName = rootFileName;
+    args.data = includeCustomAttribute;
+}
+
+</script>
