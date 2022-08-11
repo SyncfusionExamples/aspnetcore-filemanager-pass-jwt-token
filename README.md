@@ -47,7 +47,7 @@ To send the authorization header data from client side to server side use the be
 | GetImage      | [`BeforeImageLoad`](https://help.syncfusion.com/cr/aspnetcore-js2/Syncfusion.EJ2.FileManager.FileManager.html#Syncfusion_EJ2_FileManager_FileManager_BeforeImageLoad) |
 | Download     | [`BeforeDownload`](https://help.syncfusion.com/cr/aspnetcore-js2/Syncfusion.EJ2.FileManager.FileManager.html#Syncfusion_EJ2_FileManager_FileManager_BeforeDownload) |
 
-Refer to the code snippet of `Index.cshtml` page
+Find the changes in `Index.cshtml` page
 
 ```
 <ejs-filemanager id="filemanager" view="@Syncfusion.EJ2.FileManager.ViewType.Details" beforeSend="beforeSend" beforeImageLoad="beforeImageLoad" beforeDownload="beforeDownload">
@@ -60,15 +60,15 @@ function beforeSend(args) {
     //Ajax beforeSend event 
     args.ajaxSettings.beforeSend = function (args) {
         //Setting authorization header              
-        args.httpRequest.setRequestHeader("Authorization", "Pictures"); 
+        args.httpRequest.setRequestHeader("Authorization", "RootFolder"); 
     }
 }
 function beforeImageLoad(args) {
-    var rootFileName = "Pictures";
+    var rootFileName = "RootFolder";
     args.imageUrl = args.imageUrl + '&rootName=' + rootFileName;
 }
 function beforeDownload(args) {
-    var rootFileName = "Pictures" ;
+    var rootFileName = "RootFolder" ;
     var includeCustomAttribute = args.data;
     includeCustomAttribute.rootName = rootFileName;
     args.data = includeCustomAttribute;
@@ -76,7 +76,7 @@ function beforeDownload(args) {
 </script>
 ```
 
-Refer to the code snippet of `HomeController.cs` page
+Find the changes in `HomeController.cs` page
 
 ```
 public class HomeController : Controller
@@ -112,7 +112,7 @@ public class HomeController : Controller
 }
 ```
 
-Refer to the code snippet of `AmazonS3FileProvider.cs` page
+Find the changes in `AmazonS3FileProvider.cs` page
 
 ```
 public class AmazonS3FileProvider : IAmazonS3FileProviderBase

@@ -20,15 +20,15 @@ function beforeSend(args) {
     //Ajax beforeSend event 
     args.ajaxSettings.beforeSend = function (args) {
         //Setting authorization header              
-            args.httpRequest.setRequestHeader("Authorization", "Pictures"); 
+            args.httpRequest.setRequestHeader("Authorization", "RootFolder"); 
     }
 }
 function beforeImageLoad(args) {
-    var rootFileName = "Pictures";
+    var rootFileName = "RootFolder";
     args.imageUrl = args.imageUrl + '&rootName=' + rootFileName;
 }
 function beforeDownload(args) {
-    var rootFileName = "Pictures" ;
+    var rootFileName = "RootFolder" ;
     var includeCustomAttribute = args.data;
     includeCustomAttribute.rootName = rootFileName;
     args.data = includeCustomAttribute;
