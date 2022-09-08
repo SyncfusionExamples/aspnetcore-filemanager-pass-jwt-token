@@ -1,6 +1,11 @@
-# aspnetcore-filemanager-pass-jwt-token
+# ASP.NET Core FileManager Pass JWT Token
 
 This repository contains the Blazor FileManager component to send JWT token from client to server in the File Manager component.
+
+## Prerequisites
+
+* Visual Studio 2022
+* Visual Studio Code
 
 ## How to run this application?
 
