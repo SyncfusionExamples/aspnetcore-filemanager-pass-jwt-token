@@ -1,59 +1,64 @@
 # ASP.NET Core FileManager Pass JWT Token
 
-This repository contains the Blazor FileManager component to send JWT token from client to server in the File Manager component.
+**Repository Description**  
+This repository contains an **ASP.NET Core sample** that demonstrates how to **pass a JWT token (authorization data) from the client to the server** when using the Syncfusion **Essential JS 2 File Manager** component.
+
+The sample shows how File Manager events can be used to attach authorization information for read, upload, download, and image retrieval operations.
+
+## Project Overview
+The purpose of this project is to help developers understand how to secure File Manager operations in an ASP.NET Core application by sending JWT tokens or custom authorization values from the client side to the server side.
+
+It demonstrates how different File Manager events can be leveraged to pass authentication context and dynamically control access to storage resources.
+
+## Features
+- Integration of Syncfusion **Essential JS 2 File Manager**
+- Pass JWT or custom authorization values from client to server
+- Secure **read**, **upload**, **download**, **rename**, **copy**, and **delete** operations
+- Custom handling for image preview requests
+- Server‑side file operation control based on authorization data
 
 ## Prerequisites
+Ensure the following requirements are met before running this project:
+- Visual Studio 2022 or Visual Studio Code  
+- .NET SDK compatible with ASP.NET Core  
+- Syncfusion Essential JS 2 packages  
 
-* Visual Studio 2022
-* Visual Studio Code
 
-## How to run this application?
+# Installation
 
-To run this application, you need to first clone the [`blazor-filemanager-pass-jwt-token`](https://github.com/SyncfusionExamples/blazor-filemanager-pass-jwt-token) repository and then navigate to its appropriate path where it has been located in your system.
+### Clone the Repository
+Clone the repository and navigate to the project directory:
 
-To do so, open the command prompt and run the below commands one after the other.
-
-```
-git clone https://github.com/SyncfusionExamples/blazor-filemanager-pass-jwt-token 
-
+```bash
+git clone https://github.com/SyncfusionExamples/blazor-filemanager-pass-jwt-token
 cd blazor-filemanager-pass-jwt-token
-
 ```
-
-## Restore the NuGet package and build the application
-
-To restore the NuGet package, run the following command in root folder of the application.
-
-```
+### Restore and Build the Application
+Restore NuGet packages:
+```bash
 dotnet restore
 ```
-
-To build the application, run the following command.
-
-```
+Build the application:
+```bash
 dotnet build
 ```
-
-## Running application
-
-After successful compilation, run the following command to run the application.
-
-```
+### Running the Application
+After a successful build, run the application using:
+```bash
 dotnet run
 ```
+The ASP.NET Core File Manager service starts and is ready to accept authorized client requests.
 
-## File Manager authorization header for read and upload operation
+## Usage
 
+### File Manager authorization header for read and upload operation
 To send the authorization header data from client side to server side use the below FileManager events by setting the folder in the GetBucketList method.
-
 | **File Operations** | **Events** |
 | --- | --- |
 | Read, Delete, Upload, Rename, Copy         | [`BeforeSend`](https://help.syncfusion.com/cr/aspnetcore-js2/Syncfusion.EJ2.FileManager.FileManager.html#Syncfusion_EJ2_FileManager_FileManager_BeforeSend) |
 | GetImage      | [`BeforeImageLoad`](https://help.syncfusion.com/cr/aspnetcore-js2/Syncfusion.EJ2.FileManager.FileManager.html#Syncfusion_EJ2_FileManager_FileManager_BeforeImageLoad) |
 | Download     | [`BeforeDownload`](https://help.syncfusion.com/cr/aspnetcore-js2/Syncfusion.EJ2.FileManager.FileManager.html#Syncfusion_EJ2_FileManager_FileManager_BeforeDownload) |
-
 Find the changes in `Index.cshtml` page
-
 ```
 <ejs-filemanager id="filemanager" view="@Syncfusion.EJ2.FileManager.ViewType.Details" beforeSend="beforeSend" beforeImageLoad="beforeImageLoad" beforeDownload="beforeDownload">
 ...
@@ -80,9 +85,7 @@ function beforeDownload(args) {
 }
 </script>
 ```
-
 Find the changes in `HomeController.cs` page
-
 ```
 public class HomeController : Controller
 {
@@ -116,9 +119,7 @@ public class HomeController : Controller
     }
 }
 ```
-
 Find the changes in `AmazonS3FileProvider.cs` page
-
 ```
 public class AmazonS3FileProvider : IAmazonS3FileProviderBase
 {
@@ -150,3 +151,29 @@ public string FolderName="";
 }
 ```
 
+## Configuration
+Authorization handling is configured through:
+- Client‑side File Manager events
+- ASP.NET Core controller methods
+- Custom file provider logic (for example, updating the root folder dynamically)
+
+## Documentation
+- General Syncfusion documentation:
+https://help.syncfusion.com/
+- ASP.NET Core Introduction:
+https://ej2.syncfusion.com/aspnetcore/documentation/introduction
+- ASP.NET Core File Manager – Getting Started:
+https://ej2.syncfusion.com/aspnetcore/documentation/file-manager/getting-started
+
+## Additional Resources
+- Syncfusion File Manager product overview:
+https://www.syncfusion.com/javascript-ui-controls/js-file-manager
+
+## Troubleshooting
+- Ensure authorization data is sent through the correct File Manager events.
+- Verify server‑side controller methods are receiving expected parameters.
+- Rebuild the solution if configuration changes are not reflected.
+- Check application logs for authentication or routing errors.
+
+## Support
+For detailed API references, security customization guidance, and advanced File Manager scenarios, refer to the Syncfusion ASP.NET Core File Manager documentation links above.
